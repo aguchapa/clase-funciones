@@ -8,8 +8,110 @@ class App {
         get() {
             return "Hello World!"
         }
+
 }
+
 
 fun main() {
     println(App().greeting)
+
+    println(Funciones().numerosPares(listOf(1,2,3,4,5,6,7,8,9)))
+
+    println(Funciones().mayusculas(listOf("hola","como","estas")))
+
+    println(Funciones().sumarElementos(listOf(1,2,3,4,5,6,7,8)))
+
+    println(Funciones().filtrarNombres(listOf("Ana", "María", "Alberto", "Pedro",
+        "Andrés")))
+
+    println(Funciones().primerosTresElementos(listOf(10, 20, 30, 40, 50)
+    ))
+
+    val claves = listOf("nombre", "edad", "profesión"); val valores = listOf("Juan", 25, "Ingeniero")
+    println(Funciones().combinarListas(claves, valores))
+
+    println(Funciones().ordenarLista(listOf("Ana", "María", "Juan", "Pedro", "Alberto")))
+
+    println(Funciones().transformarElementos(listOf("Ana", "María", "Juan", "Pedro", "Alberto")))
+
+
+    val personas = listOf(Persona("Juan", 25), Persona("María", 32), Persona("Ana", 35), Persona("Pedro", 29))
+    println(Funciones().filtrarPersonas(personas))
+
+    println(Funciones().convertirMapa( mapOf("nombre" to "Juan", "edad" to 25, "profesión" to "Ingeniero")))
+
+    println(Funciones().contarFrecuenciaPalabras(listOf("perro", "gato", "perro", "pájaro", "gato", "perro")))
+}
+
+data class Persona(val nombre: String, val edad: Int)
+
+class Funciones{
+
+   //ejercicio 1
+   fun numerosPares(listaEnteros:List<Int>):List<Int>{
+        return listaEnteros.filter { it%2 == 0 }
+    }
+
+   // ejercicio 2
+   fun mayusculas(listaCadenas:List<String>):List<String>{
+       return listaCadenas.map { it.uppercase() }
+   }
+
+    // ejercicio 3
+    fun sumarElementos(listaEelementos:List<Int>):Int{
+        return listaEelementos.sum()
+    }
+
+    // ejercicio 4
+    fun filtrarNombres(listaEntrada:List<String>):List<String>{
+        return listaEntrada.filter { it[0]=='A'  }
+    }
+
+    // ejercicio 5
+    fun primerosTresElementos(listaEntrada:List<Any>):List<Any>{
+        return listaEntrada.filterIndexed({index,_-> index <=2})
+    }
+    // ejercicio6
+    fun combinarListas(claves:List<Any>, valores:List<Any>):Map<Any, Any>{
+//        var mapa= mutableMapOf<String,Any>()
+//        claves.{->mapa.put(it,valores)}
+        return claves.associateWith { valores[claves.indexOf(it)] }
+    }
+
+    // ejercicio 7
+    fun ordenarLista(listaEntrada:List<String>):List<String> = listaEntrada.sortedBy { it.length }
+
+    // ejercicio 8
+    fun transformarElementos(listaEntrada:List<String>):List<String> {
+        val listaResultante = listaEntrada.filter { it.length > 4 }
+        return listaResultante.map { it.uppercase() }
+    }
+
+    // ejercicio 9
+    fun filtrarPersonas(listaEntrada:List<Persona>):List<String> {
+        val listaResultante = listaEntrada.filter { it.edad > 30 }
+        return listaResultante.map { it.nombre }
+    }
+
+    // ejercicio 10
+    fun convertirMapa(mapa:Map<Any,Any>):List<String> =mapa.map { " ${it.key}:${it.value} " }
+
+    // ejercicio 11
+    fun contarFrecuenciaPalabras(lista:List<String>):Map<String, Int>{
+        //val mapaDePalabras = mutableMapOf<String, Int>()
+
+         fun calcularFrecuencia(palabra:String):Int {
+             var contador = 0
+
+             lista.forEach {
+
+                 if (it.equals(palabra)) {
+                     contador++
+                 }
+             }
+             return contador
+         }
+       return lista.associateWith { calcularFrecuencia(it) }
+
+    }
 }
