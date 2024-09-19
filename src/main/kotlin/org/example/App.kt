@@ -3,6 +3,8 @@
  */
 package org.example
 
+import java.io.FileNotFoundException
+
 class App {
     val greeting: String
         get() {
@@ -11,5 +13,32 @@ class App {
 }
 
 fun main() {
-    println(App().greeting)
+
+    try {
+        println(EjercicioExcepciones().divisionSegura(10.0, 0.0))
+        println(EjercicioExcepciones().convertirCadenaANumero("1234h.0"))
+        println(EjercicioExcepciones().validarEdad(150))
+        println(EjercicioExcepciones().leerArchivo("archivo.txt"))
+        println(EjercicioExcepciones().validarNombreUsuario("abc"))
+        println(EjercicioExcepciones().calcularPromedio(listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)))
+        println(EjercicioExcepciones().dividirString("10", "abc"))
+    } catch (e: ArithmeticException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: NumberFormatException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: IllegalArgumentException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: FileNotFoundException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: InvalidUsernameException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: java.lang.IllegalArgumentException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: NumberFormatException) {
+        println("Excepcion capturada: ${e.message}")
+    } catch (e: Exception) {
+        println("Excepcion capturada: ${e.message}")
+    }
+
+
 }
